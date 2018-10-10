@@ -30,7 +30,7 @@
 │	│	├───dolor.txt (empty)
 │	│	├───ipsum
 │	│	│	└───kontur.png (6796b)
-│   │   └───kontur.png (6796b)
+│	│	└───kontur.png (6796b)
 │	├───css
 │	│	└───body.css (28b)
 │	├───empty.txt (empty)
