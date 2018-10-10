@@ -20,9 +20,8 @@ namespace Tree
 
         public static void PrintDirectoryTree(string path, bool printFiles, TextWriter writer)
         {
-            // todo: реализовать этот метод. 
+            // todo: реализовать этот метод.
             // Результат записывать как writer.Write() или writer.WriteLine()
-
         }
     }
 }
