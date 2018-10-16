@@ -23,7 +23,7 @@
 `tree.exe . -f`
 ```
 ├───project
-│	├───file.txt (9b)
+│	├───file.txt (19b)
 │	└───kontur.png (6796b)
 ├───static
 │	├───a_lorem
