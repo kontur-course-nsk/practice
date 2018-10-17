@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using NUnit.Framework;
 
@@ -14,12 +14,12 @@ namespace Tree.Tests
 │	│	├───dolor.txt (empty)
 │	│	├───ipsum
 │	│	│	└───kontur.png (6796b)
-│   │   └───kontur.png (6796b)
+│	│	└───kontur.png (6796b)
 │	├───css
 │	│	└───body.css (28b)
 │	├───empty.txt (empty)
 │	├───html
-│	│	└───index.html (57b)
+│	│	└───index.html (61b)
 │	├───js
 │	│	└───site.js (10b)
 │	└───z_lorem
