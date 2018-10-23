@@ -6,7 +6,7 @@ namespace TestDataGenerator
 {
     public static class EventLogGenerator
     {
-        private static readonly Random Rnd = new Random();
+        private static readonly Random Rnd = new Random(1123);
 
         public static void Generate(string catalogPath)
         {

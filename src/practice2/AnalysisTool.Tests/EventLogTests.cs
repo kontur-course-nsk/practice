@@ -20,9 +20,9 @@ namespace AnalysisTool.Tests
         {
             var val = eventLog[0];
             Assert.AreEqual(DateTime.Parse("2018-06-01T08:00:00"), val.Date);
-            Assert.AreEqual("1186091", val.Article);
-            Assert.AreEqual("M14", val.Store);
-            Assert.AreEqual(8, val.Count);
+            Assert.AreEqual("1122033", val.Article);
+            Assert.AreEqual("M8", val.Store);
+            Assert.AreEqual(73, val.Count);
         }
 
         [Test]
@@ -30,9 +30,9 @@ namespace AnalysisTool.Tests
         {
             var val = eventLog[11];
             Assert.AreEqual(DateTime.Parse("2018-06-01T08:00:11"), val.Date);
-            Assert.AreEqual("1134086", val.Article);
-            Assert.AreEqual("M2", val.Store);
-            Assert.AreEqual(30, val.Count);
+            Assert.AreEqual("1028481", val.Article);
+            Assert.AreEqual("M20", val.Store);
+            Assert.AreEqual(43, val.Count);
         }
 
         [Test]
@@ -40,9 +40,9 @@ namespace AnalysisTool.Tests
         {
             var val = eventLog[eventLog.Count - 1];
             Assert.AreEqual(DateTime.Parse("2018-10-21T19:59:59"), val.Date);
-            Assert.AreEqual("1187659", val.Article);
-            Assert.AreEqual("M13", val.Store);
-            Assert.AreEqual(80, val.Count);
+            Assert.AreEqual("1240539", val.Article);
+            Assert.AreEqual("M21", val.Store);
+            Assert.AreEqual(82, val.Count);
         }
 
         [Test]
