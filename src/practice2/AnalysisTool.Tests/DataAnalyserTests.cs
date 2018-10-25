@@ -31,9 +31,9 @@ namespace AnalysisTool.Tests
         {
             get
             {
-                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 00, 0), new DateTime(2018, 6, 12, 8, 05, 0), decimal.Parse("46827568")).SetName("June valid test");
-                yield return new TestCaseData(new DateTime(2018, 10, 11, 15, 00, 0), new DateTime(2018, 10, 11, 15, 05, 0), decimal.Parse("43279237")).SetName("October valid test"); ;
-                yield return new TestCaseData(new DateTime(2018, 8, 25, 17, 00, 0), new DateTime(2018, 8, 25, 17, 05, 0), decimal.Parse("40407618")).SetName("August valid test"); ;
+                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 00, 0), new DateTime(2018, 6, 12, 8, 05, 0), decimal.Parse("47177803")).SetName("June valid test");
+                yield return new TestCaseData(new DateTime(2018, 10, 11, 15, 00, 0), new DateTime(2018, 10, 11, 15, 05, 0), decimal.Parse("54856407")).SetName("October valid test"); ;
+                yield return new TestCaseData(new DateTime(2018, 8, 25, 17, 00, 0), new DateTime(2018, 8, 25, 17, 05, 0), decimal.Parse("41827870")).SetName("August valid test"); ;
             }
         }
 
@@ -57,8 +57,8 @@ namespace AnalysisTool.Tests
         {
             get
             {
-                yield return new TestCaseData(new DateTime(2018, 6, 12, 0, 0, 0), new DateTime(2018, 6, 13, 0, 0, 0), decimal.Parse("46827568")).SetName("June valid test");
-                yield return new TestCaseData(new DateTime(2018, 10, 1, 0, 0, 0), new DateTime(2018, 10, 07, 0, 0, 0), decimal.Parse("46827568")).SetName("June valid test");
+                yield return new TestCaseData(new DateTime(2018, 6, 12, 0, 0, 0), new DateTime(2018, 6, 13, 0, 0, 0), decimal.Parse("6921146623")).SetName("Full day long test");
+                yield return new TestCaseData(new DateTime(2018, 10, 1, 0, 0, 0), new DateTime(2018, 10, 07, 0, 0, 0), decimal.Parse("41334527957")).SetName("Full week long test");
             }
         }
     }
