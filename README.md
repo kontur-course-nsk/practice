@@ -4,3 +4,5 @@
 [Занятие 1](https://github.com/kontur-course-nsk/practice/tree/master/src/practice1)
 
 [Занятие 2](https://github.com/kontur-course-nsk/practice/tree/master/src/practice2)
+
+[Занятие 3](https://github.com/kontur-course-nsk/practice/tree/master/src/practice3)
