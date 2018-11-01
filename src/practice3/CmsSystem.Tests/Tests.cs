@@ -114,9 +114,10 @@ namespace CmsSystem.Tests
         {
             get
             {
-                yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Day, DateTime.MinValue, DateTime.MaxValue, 138).SetName("Full per day statistics");
+                yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Day, DateTime.MinValue, DateTime.MaxValue, 137).SetName("Full per day statistics");
                 yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Month, DateTime.MinValue, DateTime.MaxValue, 5).SetName("Full per month statistics");
-                yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Year, DateTime.MinValue, DateTime.MaxValue, 1).SetName("Full per year statistics");
+				// если ваш код работает быстро - раскоментите TestCase ниже
+                //     yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Year, DateTime.MinValue, DateTime.MaxValue, 1).SetName("Full per year statistics");
             }
         }
 
@@ -135,11 +136,11 @@ namespace CmsSystem.Tests
                             Date = new DateTime(2018, 10, 10),
                             Top5SellingArticles = new[]
                             {
-                                "1249755",
-                                "1099517",
-                                "1099323",
-                                "1157361",
-                                "1172393"
+                               "1290323",
+                               "1208675",
+                               "1158864",
+                               "1225843",
+                               "1226911"
                             }
                         },
                         new Cms.DataAnalyzer.TopSellingArticlesResult()
@@ -147,11 +148,11 @@ namespace CmsSystem.Tests
                             Date = new DateTime(2018, 10, 11),
                             Top5SellingArticles = new[]
                             {
-                                "1090523",
-                                "1195829",
-                                "1129186",
-                                "1140065",
-                                "1245854"
+                                "1256938",
+                                "1152930",
+                                "1015777",
+                                "1243488",
+                                "1236925"
                             }
                         },
                     }).SetName("Per day statistics");
@@ -166,11 +167,11 @@ namespace CmsSystem.Tests
                             Date = new DateTime(2018, 10, 10),
                             Top5SellingArticles = new[]
                             {
-                                "1090523",
-                                "1195829",
-                                "1129186",
-                                "1140065",
-                                "1245854"
+                                "1256938",
+                                "1152930",
+                                "1015777",
+                                "1049923",
+                                "1226911"
                             }
                         }
                     }).SetName("Per month statistics");
@@ -185,11 +186,11 @@ namespace CmsSystem.Tests
                             Date = new DateTime(2018, 10, 10),
                             Top5SellingArticles = new[]
                             {
-                                "1090523",
-                                "1195829",
-                                "1129186",
-                                "1140065",
-                                "1245854"
+                                "1256938",
+                                "1152930",
+                                "1015777",
+                                "1049923",
+                                "1226911"
                             }
                         }
                     }).SetName("Per year statistics");
