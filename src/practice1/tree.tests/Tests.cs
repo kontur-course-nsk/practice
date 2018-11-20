@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using NUnit.Framework;
 
-namespace Tree.Tests
+namespace tree.tests
 {
     public class Tests
     {
