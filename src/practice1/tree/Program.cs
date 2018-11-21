@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Tree
+namespace tree
 {
     public class Program
     {
