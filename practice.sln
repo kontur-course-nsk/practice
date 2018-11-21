@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmsSystem", "src\practice3\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmsSystem.Tests", "src\practice3\CmsSystem.Tests\CmsSystem.Tests.csproj", "{5111F580-4229-41C1-B1ED-BF57551692D4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "practice4", "practice4", "{5C33F2F7-5D25-418B-BBED-5838B5D52A86}"
+	ProjectSection(SolutionItems) = preProject
+		src\practice4\Readme.md = src\practice4\Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
