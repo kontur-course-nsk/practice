@@ -8,3 +8,7 @@
 [Занятие 3](https://github.com/kontur-course-nsk/practice/tree/master/src/practice3)
 
 [Занятие 4](https://github.com/kontur-course-nsk/practice/tree/master/src/practice4)
+
+[Занятие 6](https://github.com/kontur-course-nsk/practice/tree/master/src/practice6)
+
+[Занятие 7](https://github.com/kontur-course-nsk/practice/tree/master/src/practice7)
