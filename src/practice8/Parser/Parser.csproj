@@ -41,7 +41,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\practice8\Parser.Generator\Parser.Generator.csproj">
+    <ProjectReference Include="..\Parser.Generator\Parser.Generator.csproj">
       <Project>{5029C044-A1AF-49E8-B1AD-8C26402F549B}</Project>
       <Name>Parser.Generator</Name>
     </ProjectReference>

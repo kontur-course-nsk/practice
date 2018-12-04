@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.CLI", "src\practice8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Generator", "src\practice8\Parser.Generator\Parser.Generator.csproj", "{5029C044-A1AF-49E8-B1AD-8C26402F549B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "src\practice8\Parser\Parser.csproj", "{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
