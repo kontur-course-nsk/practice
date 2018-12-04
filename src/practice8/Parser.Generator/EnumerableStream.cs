@@ -33,10 +33,14 @@ namespace Parser.Generator
         private bool SerializeNext()
         {
             if (!_source.MoveNext())
+            {
                 return false;
+            }
 
             foreach (var b in _serializer(_source.Current))
+            {
                 _buf.Enqueue(b);
+            }
 
             return true;
         }
@@ -57,7 +61,10 @@ namespace Parser.Generator
             while (read < count)
             {
                 var mayb = NextByte();
-                if (mayb == null) break;
+                if (mayb == null)
+                {
+                    break;
+                }
 
                 buffer[offset + read] = (byte)mayb;
                 read++;

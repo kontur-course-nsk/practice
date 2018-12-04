@@ -12,3 +12,5 @@
 [Занятие 6](https://github.com/kontur-course-nsk/practice/tree/master/src/practice6)
 
 [Занятие 7](https://github.com/kontur-course-nsk/practice/tree/master/src/practice7)
+
+[Занятие 8](https://github.com/kontur-course-nsk/practice/tree/master/src/practice8)
