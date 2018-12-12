@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Generator", "src\pra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "src\practice8\Parser\Parser.csproj", "{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "practice9", "practice9", "{61B2B12C-875E-4C12-9DA4-BAD3D1722A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleKeysDictionary", "src\practice9\DoubleKeysDictionary\DoubleKeysDictionary.csproj", "{2B3CC632-0A86-4BFD-9B02-B89A6B66C2D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,10 @@ Global
 		{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B3CC632-0A86-4BFD-9B02-B89A6B66C2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B3CC632-0A86-4BFD-9B02-B89A6B66C2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B3CC632-0A86-4BFD-9B02-B89A6B66C2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B3CC632-0A86-4BFD-9B02-B89A6B66C2D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +130,7 @@ Global
 		{A16B937D-4974-4392-AEEF-9954E7A85ECC} = {9CCB7141-60E0-42A5-8779-8151B709A5DF}
 		{5029C044-A1AF-49E8-B1AD-8C26402F549B} = {9CCB7141-60E0-42A5-8779-8151B709A5DF}
 		{0D4C9336-F4C2-41C1-A1C8-9289AD1C2125} = {9CCB7141-60E0-42A5-8779-8151B709A5DF}
+		{2B3CC632-0A86-4BFD-9B02-B89A6B66C2D1} = {61B2B12C-875E-4C12-9DA4-BAD3D1722A77}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8598514F-5832-4231-909F-463E0C8AAC19}
