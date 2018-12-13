@@ -6,16 +6,6 @@ namespace DoubleKeysDictionary
 {
     public class DoubleKeysDictionary<TKey1, TKey2, TValue> : IDictionary<TKey1, TKey2, TValue>
     {
-        public IEnumerator<KeyValuePair<(TKey1, TKey2), TValue>> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         public int Count { get; }
 
         public bool IsReadOnly { get; }
@@ -24,15 +14,14 @@ namespace DoubleKeysDictionary
 
         public ICollection<TValue> Values { get; }
 
-        public TValue this[TKey1 key]
+        public IEnumerator<KeyValuePair<(TKey1, TKey2), TValue>> GetEnumerator()
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            throw new NotImplementedException();
         }
-        public TValue this[TKey2 key]
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public void Add(KeyValuePair<(TKey1, TKey2), TValue> item)
@@ -60,30 +49,45 @@ namespace DoubleKeysDictionary
             throw new NotImplementedException();
         }
 
-
         public void Add(TKey1 key1, TKey2 key2, TValue value)
         {
             throw new NotImplementedException();
         }
-
-        public bool ContainsKey(TKey1 key)
+    
+        public bool ContainsKey1(TKey1 key)
         {
             throw new NotImplementedException();
         }
 
-        public bool ContainsKey(TKey2 key)
+        public bool ContainsKey2(TKey2 key)
         {
             throw new NotImplementedException();
         }
 
-        public bool TryGetValue(TKey1 key, out TValue value)
+        public bool TryGetValueByKey1(TKey1 key, out TValue value)
         {
             throw new NotImplementedException();
         }
 
-        public bool TryGetValue(TKey2 key, out TValue value)
+        public bool TryGetValueByKey2(TKey2 key, out TValue value)
         {
             throw new NotImplementedException();
+        }
+
+        public TValue GetValueByKey1(TKey1 key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TValue GetValueByKey2(TKey2 key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TValue this[(TKey1, TKey2) key]
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
     }
 }
