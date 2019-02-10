@@ -11,13 +11,13 @@ namespace TextEditor
     /// </summary>
     public class EditController
     {
-        private readonly ControllerState state;
+        private readonly IControllerState state;
         private readonly bool throwExceptionIfCommandNotFound;
         
         public EditController(bool throwExceptionIfCommandNotFound = false) : 
             this(new ControllerState(), throwExceptionIfCommandNotFound) {}
         
-        public EditController(ControllerState state, bool throwExceptionIfCommandNotFound = false)
+        public EditController(IControllerState state, bool throwExceptionIfCommandNotFound = false)
         {
             this.state = state;
             this.throwExceptionIfCommandNotFound = throwExceptionIfCommandNotFound;
