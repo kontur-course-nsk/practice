@@ -8,10 +8,16 @@ namespace ExtendableTextEditor
     internal class Program
     {
         private static EditController controller;
+        private static GlobalEditorSettings settings;
         
         public static void Main(string[] args)
         {
-            controller = new EditController();
+            settings = new GlobalEditorSettings
+            {
+                ThrowExceptionIfCommandNotFound = false,
+                Theme = "darkula"
+            };
+            controller = new EditController(settings.ThrowExceptionIfCommandNotFound);
             InteractiveMode();
         }
 

@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleKeysDictionary", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "practice10", "practice10", "{882DBF81-9049-408D-BBF8-64E45C4F8121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableTextEditor", "ExtendableTextEditor\ExtendableTextEditor.csproj", "{36503978-2D50-4D84-9859-D8EB755CF76C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendableTextEditor", "src\practice10\ExtendableTextEditor\ExtendableTextEditor.csproj", "{36503978-2D50-4D84-9859-D8EB755CF76C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

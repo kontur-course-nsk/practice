@@ -1,23 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
+using ExtendableTextEditor;
 
 namespace TextEditor
 {
     /// <summary>
     ///     Контроллер текстового редактора
-    ///     Хранит внутреннее состояние и оповещает о его изменеии UI (работа с UI не реализована)
     /// </summary>
     public class EditController
     {
         private readonly ControllerState state;
+        private readonly bool throwExceptionIfCommandNotFound;
         
-        public EditController() : 
-            this(new ControllerState()) {}
+        public EditController(bool throwExceptionIfCommandNotFound = false) : 
+            this(new ControllerState(), throwExceptionIfCommandNotFound) {}
         
-        public EditController(ControllerState state)
+        public EditController(ControllerState state, bool throwExceptionIfCommandNotFound = false)
         {
             this.state = state;
+            this.throwExceptionIfCommandNotFound = throwExceptionIfCommandNotFound;
         }
 
         /// <summary>
@@ -51,7 +54,10 @@ namespace TextEditor
                 case "backspace":
                     return Backspace(args);
                  default:
-                     return (false, $"Command '{command}' not found");
+                     if (throwExceptionIfCommandNotFound)
+                        throw new CommandNotFoundException(command);
+                     else
+                       return (false, $"Command '{command}' not found");
             }
         }
         
