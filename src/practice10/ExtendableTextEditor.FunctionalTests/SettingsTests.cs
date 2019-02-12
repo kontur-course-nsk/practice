@@ -8,11 +8,6 @@ namespace ExtendableTextEditor.FunctionalTests
     [TestFixture]
     public class SettingsTests : BaseFixture
     {
-        protected override void SetupActions()
-        {
-            // TODO: зарегистрировать команду в контроллере
-        }
-        
         [Test]
         public void ShouldBeHot()
         {
