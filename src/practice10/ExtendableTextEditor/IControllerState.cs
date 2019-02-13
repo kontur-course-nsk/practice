@@ -1,7 +1,7 @@
-using System.Text;
-
-namespace TextEditor
+namespace ExtendableTextEditor
 {
+    using System.Text;
+
     public interface IControllerState
     {
         StringBuilder Text { get; }

@@ -1,8 +1,7 @@
-using NUnit.Framework;
-using TextEditor;
-
-namespace ExtendableTextEditor.FunctionalTests
+namespace ExtendableTextEditor.Tests
 {
+    using NUnit.Framework;
+
     public abstract class BaseFixture
     {
         protected GlobalEditorSettings settings;
@@ -12,16 +11,16 @@ namespace ExtendableTextEditor.FunctionalTests
         [SetUp]
         public void Setup()
         {
-            settings = new GlobalEditorSettings
+            this.settings = new GlobalEditorSettings
             {
                 ThrowExceptionIfCommandNotFound = false
             };
-            state = new ControllerState();
-            state.Text.Append("abcdefg");
-            state.CurrentPosition = 3;
+            this.state = new ControllerState();
+            this.state.Text.Append("abcdefg");
+            this.state.CurrentPosition = 3;
             // TODO: заменить на реализацию "горячих" настроек
-            controller = new EditController(state, settings.ThrowExceptionIfCommandNotFound);
-            SetupActions();
+            this.controller = new EditController(this.state, this.settings.ThrowExceptionIfCommandNotFound);
+            this.SetupActions();
         }
 
         /// <summary>
@@ -29,7 +28,6 @@ namespace ExtendableTextEditor.FunctionalTests
         /// </summary>
         protected virtual void SetupActions()
         {
-            
         }
     }
 }

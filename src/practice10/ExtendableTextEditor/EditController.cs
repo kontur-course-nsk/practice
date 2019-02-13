@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-using ExtendableTextEditor;
-
-namespace TextEditor
+namespace ExtendableTextEditor
 {
     /// <summary>
     ///     Контроллер текстового редактора
@@ -13,10 +7,12 @@ namespace TextEditor
     {
         private readonly IControllerState state;
         private readonly bool throwExceptionIfCommandNotFound;
-        
-        public EditController(bool throwExceptionIfCommandNotFound = false) : 
-            this(new ControllerState(), throwExceptionIfCommandNotFound) {}
-        
+
+        public EditController(bool throwExceptionIfCommandNotFound = false) :
+            this(new ControllerState(), throwExceptionIfCommandNotFound)
+        {
+        }
+
         public EditController(IControllerState state, bool throwExceptionIfCommandNotFound = false)
         {
             this.state = state;
@@ -28,15 +24,15 @@ namespace TextEditor
         /// </summary>
         public int CurrentPosition
         {
-            get { return state.CurrentPosition; }
+            get { return this.state.CurrentPosition; }
         }
-        
+
         /// <summary>
         ///     Редактируемый текст
         /// </summary>
         public string Text
         {
-            get { return state.Text.ToString(); }
+            get { return this.state.Text.ToString(); }
         }
 
         /// <summary>
@@ -50,38 +46,36 @@ namespace TextEditor
             switch (command)
             {
                 case "insert":
-                    return Insert(args);
+                    return this.Insert(args);
                 case "backspace":
-                    return Backspace(args);
-                 default:
-                     if (throwExceptionIfCommandNotFound)
+                    return this.Backspace(args);
+                default:
+                    if (this.throwExceptionIfCommandNotFound)
                         throw new CommandNotFoundException(command);
-                     else
-                       return (false, $"Command '{command}' not found");
+                    else
+                        return (false, $"Command '{command}' not found");
             }
         }
-        
+
         ////////////////
         /// Commands ///
         ////////////////
-
         private (bool, string) Insert(params string[] args)
         {
             if (args.Length < 1)
                 return (false, "Pass argument for insert");
-            state.Text.Insert(state.CurrentPosition, args[0]);
-            state.CurrentPosition += args[0].Length;
+            this.state.Text.Insert(this.state.CurrentPosition, args[0]);
+            this.state.CurrentPosition += args[0].Length;
             return (true, null);
         }
-        
+
         private (bool, string) Backspace(params string[] args)
         {
-            if(state.CurrentPosition <= 0)
+            if (this.state.CurrentPosition <= 0)
                 return (false, "No symbols on left side");
-            state.CurrentPosition--;
-            state.Text.Remove(state.CurrentPosition, 1);
+            this.state.CurrentPosition--;
+            this.state.Text.Remove(this.state.CurrentPosition, 1);
             return (true, null);
         }
-        
     }
 }

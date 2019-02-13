@@ -1,8 +1,8 @@
-using FluentAssertions;
-using NUnit.Framework;
-
-namespace ExtendableTextEditor.FunctionalTests
+namespace ExtendableTextEditor.Tests
 {
+    using FluentAssertions;
+    using NUnit.Framework;
+
     [TestFixture]
     public class MoveCursorCommand_Tests : BaseFixture
     {
@@ -10,7 +10,7 @@ namespace ExtendableTextEditor.FunctionalTests
         {
             // TODO: зарегистрировать команду в контроллере
         }
-        
+
         [TestCase(-3)]
         [TestCase(-1)]
         [TestCase(0)]
@@ -18,25 +18,25 @@ namespace ExtendableTextEditor.FunctionalTests
         [TestCase(+4)]
         public void ApplyShouldMoveCursorToDifferentDistances(int targetPosition)
         {
-            var oldPosition = state.CurrentPosition;
-            
-            var result = controller.ApplyCommand("movecursor", targetPosition.ToString());
+            var oldPosition = this.state.CurrentPosition;
+
+            var result = this.controller.ApplyCommand("movecursor", targetPosition.ToString());
 
             result.IsSuccess.Should().BeTrue();
-            state.CurrentPosition.Should().Be(oldPosition + targetPosition);
+            this.state.CurrentPosition.Should().Be(oldPosition + targetPosition);
         }
-        
+
         [TestCase(0)]
         [TestCase(3)]
         [TestCase(6)]
         public void ApplyShouldMoveCursorFromDifferentPositions(int startPosition)
         {
-            state.CurrentPosition = startPosition;
-            
-            var result = controller.ApplyCommand("movecursor", 1.ToString());
+            this.state.CurrentPosition = startPosition;
+
+            var result = this.controller.ApplyCommand("movecursor", 1.ToString());
 
             result.IsSuccess.Should().BeTrue();
-            state.CurrentPosition.Should().Be(startPosition + 1);
+            this.state.CurrentPosition.Should().Be(startPosition + 1);
         }
     }
 }

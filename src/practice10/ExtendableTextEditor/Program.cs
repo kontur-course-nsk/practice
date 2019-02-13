@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using TextEditor;
-
-namespace ExtendableTextEditor
+﻿namespace ExtendableTextEditor
 {
+    using System;
+    using System.Linq;
+
     internal class Program
     {
         private static EditController controller;
         private static GlobalEditorSettings settings;
-        
+
         public static void Main(string[] args)
         {
             settings = new GlobalEditorSettings
@@ -27,7 +25,7 @@ namespace ExtendableTextEditor
             while (true)
             {
                 var input = Console.ReadLine();
-                if(input == null)
+                if (input == null)
                     continue;
                 switch (input)
                 {
@@ -37,13 +35,12 @@ namespace ExtendableTextEditor
                         Console.WriteLine($"Text: $'{controller.Text}', position: {controller.CurrentPosition}");
                         break;
                     default:
-                        var command = input.Split(new []{' ', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+                        var command = input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
                         var (isSuccess, errorMessage) = controller.ApplyCommand(command[0], command.Skip(1).ToArray());
-                        if(!isSuccess)
+                        if (!isSuccess)
                             Console.WriteLine($"Can't apply command: {errorMessage ?? string.Empty}");
                         break;
                 }
-                
             }
         }
 
@@ -53,6 +50,5 @@ namespace ExtendableTextEditor
             controller.ApplyCommand("backspace");
             controller.ApplyCommand("backspace");
         }
-        
     }
 }
