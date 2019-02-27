@@ -15,6 +15,8 @@ namespace Multithreading
             var tweets = new List<ITweet>();
             Auth.SetUserCredentials("CONSUMER_KEY", "CONSUMER_SECRET", "ACCESS_TOKEN", "ACCESS_TOKEN_SECRET");
 
+            // Если у вас нет ключей для твиттера, то подключитесь к локальному сервису
+            //var localSearcher = new LocalSearch("localhost", 5000);
             long maxId = 0;
             for (int i = 0; i < 15; i++)
             {
@@ -28,6 +30,7 @@ namespace Multithreading
                 };
 
                 var searchResult = Search.SearchTweets(request).ToList();
+                //var searchResult = localSearcher.SearchTweets(request).ToList();//Search.SearchTweets(request).ToList();
                 tweets.AddRange(i == 0 ? searchResult : searchResult.Skip(1));
                 maxId = searchResult.Min(x => x.Id);
             }
