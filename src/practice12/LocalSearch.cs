@@ -15,29 +15,36 @@ namespace Multithreading
 {
     public class LocalSearch
     {
-        private readonly string ip;
+        private readonly string ipOrHost;
         private readonly int port;
 
 
-        public LocalSearch(string ip, int port)
+        public LocalSearch(string ipOrHost, int port)
         {
-            this.ip = ip;
+            this.ipOrHost = ipOrHost;
             this.port = port;
         }
 
         public IEnumerable<ITweet> SearchTweets(SearchTweetsParameters param)
         {
-            var request = WebRequest.Create($"http://{ip}:{port}/tweets/get");
+            var request = WebRequest.Create($"http://{ipOrHost}:{port}/tweets/get");
             var response = request.GetResponse();
-            using (var s = request.GetResponse().GetResponseStream())
+            using (var stream = request.GetResponse().GetResponseStream())
             {
-                using (var sr = new StreamReader(s))
+                using (var streamReader = new StreamReader(stream))
                 {
-                    var contributorsAsJson = sr.ReadToEnd();
-                    var tweets = JsonConvert.DeserializeObject<List<Tweet>>(contributorsAsJson);
-                    return tweets.Select((inputTweet) => new ResultTweet
+                    var jsonString = streamReader.ReadToEnd();
+                    var tweets = JsonConvert.DeserializeObject<List<Tweet>>(jsonString);
+                    return tweets.Select(inputTweet => new ResultTweet
                     {
-                        Hashtags = inputTweet.Tags.Select((tag) => new HashtagEntity() {Text = tag}).Cast<IHashtagEntity>().ToList()
+                        Hashtags = inputTweet.Tags.Select(
+                                tag =>
+                                    new HashtagEntity
+                                    {
+                                        Text = tag
+                                    })
+                            .Cast<IHashtagEntity>()
+                            .ToList()
                     });
                 }
             }
@@ -45,13 +52,14 @@ namespace Multithreading
 
         private class Tweet
         {
-            public List<string> Tags = new List<string>();
+            public readonly List<string> Tags = new List<string>();
         }
 
         public class ResultTweet : ITweet
         {
             public long Id { get; }
             public string IdStr { get; }
+
             public Task<ITweet> PublishRetweetAsync()
             {
                 throw new NotImplementedException();
@@ -173,7 +181,5 @@ namespace Multithreading
             public bool IsTweetDestroyed { get; }
             public string Url { get; }
         }
-
-
     }
 }
