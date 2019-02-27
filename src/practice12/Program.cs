@@ -60,7 +60,7 @@ namespace Multithreading
                     countJavaHashtag++;
                 }
 
-                if (countJavaHashtag + countJavaHashtag != 0)
+                if (countCSharpHashtag + countJavaHashtag != 0)
                 {
                     Console.Write(
                         "\rC#:{0:P}    Java:{1:P}",
