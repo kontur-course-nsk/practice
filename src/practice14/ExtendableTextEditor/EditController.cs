@@ -9,12 +9,12 @@ namespace ExtendableTextEditor
     public class EditController
     {
         private readonly IControllerState state;
-        private readonly Dictionary<string, Func<IControllerState, string[], (bool, string)>> commands;
+        private readonly Dictionary<string, Func<IControllerState, string[], CommandResult>> commands;
 
         public EditController(IControllerState state = null)
         {
             this.state = state ?? new ControllerState();
-            commands = new Dictionary<string, Func<IControllerState, string[], (bool, string)>>
+            commands = new Dictionary<string, Func<IControllerState, string[], CommandResult>>
             {
                 {"insert", InsertCommand}
             };
@@ -36,11 +36,11 @@ namespace ExtendableTextEditor
         /// <param name="command">Команда</param>
         /// <param name="args">Аргументы для выполнения команды (могут отсуствовать)</param>
         /// <returns>Успешность применения команды и сообщение об ошибке</returns>
-        public (bool IsSuccess, string ErrorMessage) ApplyCommand(string command, params string[] args)
+        public CommandResult ApplyCommand(string command, params string[] args)
         {
             return commands.TryGetValue(command, out var commandFunc) 
                 ? commandFunc(state, args) 
-                : (false, $"Command '{command}' not found");
+                : new CommandResult(false, $"Command '{command}' not found");
         }
 
         /// <summary>
@@ -54,13 +54,13 @@ namespace ExtendableTextEditor
         ////////////////
         /// Commands ///
         ////////////////
-        private static (bool, string) InsertCommand(IControllerState state, string[] args)
+        private static CommandResult InsertCommand(IControllerState state, string[] args)
         {
             if (args.Length < 1)
-                return (false, "Pass argument for insert");
+                return new CommandResult(false, "Pass argument for insert");
             state.Text.Insert(state.CurrentPosition, args[0]);
             state.CurrentPosition += args[0].Length;
-            return (true, null);
+            return new CommandResult(true, null);
         }
     }
 }

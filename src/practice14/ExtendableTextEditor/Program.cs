@@ -26,13 +26,13 @@
                     case "exit":
                         return;
                     case "state":
-                        Console.WriteLine($"Text: $'{controller.Text}', position: {controller.CurrentPosition}");
+                        Console.WriteLine($"Text: '{controller.Text}', position: {controller.CurrentPosition}");
                         break;
                     default:
                         var command = input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                        var (isSuccess, errorMessage) = controller.ApplyCommand(command[0], command.Skip(1).ToArray());
-                        if (!isSuccess)
-                            Console.WriteLine($"Can't apply command: {errorMessage ?? string.Empty}");
+                        var result = controller.ApplyCommand(command[0], command.Skip(1).ToArray());
+                        if (!result.IsSuccess)
+                            Console.WriteLine($"Can't apply command: {result.ErrorMessage ?? string.Empty}");
                         break;
                 }
             }

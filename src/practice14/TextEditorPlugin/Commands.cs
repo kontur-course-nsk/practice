@@ -4,13 +4,18 @@ namespace TestEditorPlugin
 {
     public static class Commands
     {
-        public static (bool, string) Backspace(IControllerState state, string[] args)
+        public static CommandResult Backspace(IControllerState state, string[] args)
         {
             if (state.CurrentPosition <= 0)
-                return (false, "No symbols on left side");
+                return new CommandResult(false, "No symbols on left side");
             state.CurrentPosition--;
             state.Text.Remove(state.CurrentPosition, 1);
-            return (true, null);
+            return new CommandResult(true, null);
+        }
+
+        public static int RandomMethod()
+        {
+            return 0;
         }
     }
 }
