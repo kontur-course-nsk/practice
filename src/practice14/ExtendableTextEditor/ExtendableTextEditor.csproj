@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36503978-2D50-4D84-9859-D8EB755CF76C}</ProjectGuid>
+    <ProjectGuid>{210647c8-8664-48dc-a235-09e592c59d1d}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExtendableTextEditor</RootNamespace>
