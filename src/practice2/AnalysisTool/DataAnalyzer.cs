@@ -1,14 +1,13 @@
 using System;
-using AnalysisTool.Models;
 
 namespace AnalysisTool
 {
-    public class DataAnalyser
+    public class DataAnalyzer
     {
         private readonly EventLog eventLog;
         private readonly Catalog catalog;
 
-        public DataAnalyser(EventLog eventLog, Catalog catalog)
+        public DataAnalyzer(EventLog eventLog, Catalog catalog)
         {
             this.eventLog = eventLog ?? throw new ArgumentNullException(nameof(eventLog));
             this.catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));

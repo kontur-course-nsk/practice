@@ -42,7 +42,7 @@ namespace AnalysisTool
         private static EventRecord ParseLine(byte[] bytes, int offset = 0)
         {
             var str = Encoding.UTF8.GetString(bytes, offset, RecordLength).Split(';');
-            return new EventRecord()
+            return new EventRecord
             {
                 Date = DateTime.Parse(str[0]),
                 Article = str[1].TrimStart('0'),

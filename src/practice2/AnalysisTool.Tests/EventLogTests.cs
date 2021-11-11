@@ -11,7 +11,7 @@ namespace AnalysisTool.Tests
         [OneTimeSetUp]
         public void Setup()
         {
-            Environment.CurrentDirectory = Path.GetDirectoryName(typeof(DataAnalyserTests).Assembly.Location);
+            Environment.CurrentDirectory = Path.GetDirectoryName(typeof(DataAnalyzerTests).Assembly.Location);
             eventLog = new EventLog("events.csv");
         }
 

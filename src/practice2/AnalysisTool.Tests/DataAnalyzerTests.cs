@@ -5,12 +5,12 @@ using NUnit.Framework;
 
 namespace AnalysisTool.Tests
 {
-    public class DataAnalyserTests
+    public class DataAnalyzerTests
     {
         [OneTimeSetUp]
         public void Setup()
         {
-            Environment.CurrentDirectory = Path.GetDirectoryName(typeof(DataAnalyserTests).Assembly.Location);
+            Environment.CurrentDirectory = Path.GetDirectoryName(typeof(DataAnalyzerTests).Assembly.Location);
         }
 
         [TestCaseSource(nameof(ValidCases))]
@@ -21,7 +21,7 @@ namespace AnalysisTool.Tests
             var catalog = new Catalog("catalog.csv");
             using (var eventLog = new EventLog("events.csv"))
             {
-                var dataAnalyzer = new DataAnalyser(eventLog, catalog);
+                var dataAnalyzer = new DataAnalyzer(eventLog, catalog);
                 var revenue = dataAnalyzer.GetRevenue(from, to);
                 Assert.AreEqual(result, revenue);
             }
@@ -44,7 +44,7 @@ namespace AnalysisTool.Tests
                 yield return new TestCaseData(new DateTime(2018, 10, 11, 21, 0, 0), new DateTime(2018, 10, 11, 22, 0, 0), decimal.Parse("-1")).SetName("Time without events test");
                 yield return new TestCaseData(new DateTime(2019, 10, 11, 15, 0, 0), new DateTime(2019, 10, 11, 15, 05, 0), decimal.Parse("-1")).SetName("Missing future dates test"); ;
                 yield return new TestCaseData(new DateTime(2017, 5, 12, 8, 0, 0), new DateTime(2017, 5, 12, 8, 05, 0), decimal.Parse("-1")).SetName("Missing past events test"); ;
-                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 0, 0), new DateTime(2018, 6, 12, 8, 0, 0), decimal.Parse("-1")).SetName("Equal dates test"); ;
+                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 0, 0), new DateTime(2018, 6, 12, 8, 0, 0), decimal.Parse("44970")).SetName("Equal dates test"); ;
                 yield return new TestCaseData(new DateTime(2018, 5, 12, 8, 05, 0), new DateTime(2018, 5, 12, 8, 0, 0), decimal.Parse("-1")).SetName("Wrong dates order test"); ;
             }
         }

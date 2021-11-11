@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>net471</TargetFrameworks>
-    <Configurations>Debug;Release</Configurations>
-    <Platforms>AnyCPU</Platforms>
+    <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\tree\tree.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="testData\project\file.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -64,5 +58,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>
