@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CmsSystem
 {
@@ -30,16 +28,17 @@ namespace CmsSystem
             public decimal GetRevenue(DateTime startDate, DateTime endDate)
             {
                 decimal result = 0;
-                var enumerator = this.cms.bTree.EnumerateRange(startDate, endDate);
                 var dataFound = false;
-                foreach (var item in enumerator)
+                foreach (var item in this.cms.bTree.EnumerateRange(startDate, endDate))
                 {
                     if (!dataFound)
                     {
                         dataFound = true;
                     }
 
-                    result += decimal.Multiply(item.Value.Count, this.catalog.GetCatalogRecord(item.Value.Article).Price);
+                    result += decimal.Multiply(
+                        item.Value.Count,
+                        this.catalog.GetCatalogRecord(item.Value.Article).Price);
                 }
 
                 if (!dataFound)
@@ -51,14 +50,17 @@ namespace CmsSystem
             }
 
             /// <summary>
-            /// Функция возвращает топ 5 самых продаваемых товаров за указанный промежуток времени с указанной аггрегацией по времени. 
+            /// Функция возвращает топ 5 самых продаваемых товаров за указанный промежуток времени с указанной аггрегацией по времени.
             /// Можно выбрать распределение за каждый день/неделю/месяц
             /// </summary>
             /// <param name="aggregation"></param>
             /// <param name="startDate">Дата начала поиска</param>
             /// <param name="endDate">Дата окончания поиска</param>
             /// <returns></returns>
-            public TopSellingArticlesResult[] GetTopSellingArticles(Aggregation aggregation, DateTime startDate, DateTime endDate)
+            public TopSellingArticlesResult[] GetTopSellingArticles(
+                Aggregation aggregation,
+                DateTime startDate,
+                DateTime endDate)
             {
                 throw new NotImplementedException();
             }
@@ -74,7 +76,7 @@ namespace CmsSystem
             {
                 Day,
                 Month,
-                Year
+                Year,
             }
         }
     }

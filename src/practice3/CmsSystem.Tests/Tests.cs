@@ -18,8 +18,10 @@ namespace CmsSystem.Tests
             Environment.CurrentDirectory = Path.GetDirectoryName(typeof(Tests).Assembly.Location);
             this.cms = new Cms();
 
-            // после того как первый раз заполните cms данными, эту строчку нужно закоментить
-            FillTestData(6, 11);
+            if (cms.Count == 0)
+            {
+                FillTestData(6, 11);
+            }
         }
 
         [OneTimeTearDown]
@@ -39,7 +41,11 @@ namespace CmsSystem.Tests
         }
 
         [TestCaseSource(nameof(TopSalingArticlesForTwoDays))]
-        public void TopSailingAtriclesTests(Cms.DataAnalyzer.Aggregation aggregation, DateTime startDate, DateTime endDate, Cms.DataAnalyzer.TopSellingArticlesResult[] result)
+        public void TopSailingArticlesTests(
+            Cms.DataAnalyzer.Aggregation aggregation,
+            DateTime startDate,
+            DateTime endDate,
+            Cms.DataAnalyzer.TopSellingArticlesResult[] result)
         {
             var dataAnalyzer = cms.GetDataAnalyzer();
             var topSellingArticles = dataAnalyzer.GetTopSellingArticles(aggregation, startDate, endDate);
@@ -48,7 +54,11 @@ namespace CmsSystem.Tests
         }
 
         [TestCaseSource(nameof(TopSalingArticlesWholeYear))]
-        public void TopSailingAtriclesTests(Cms.DataAnalyzer.Aggregation aggregation, DateTime startDate, DateTime endDate, int resultCount)
+        public void TopSailingArticlesTests(
+            Cms.DataAnalyzer.Aggregation aggregation,
+            DateTime startDate,
+            DateTime endDate,
+            int resultCount)
         {
             var dataAnalyzer = cms.GetDataAnalyzer();
             var topSellingArticles = dataAnalyzer.GetTopSellingArticles(aggregation, startDate, endDate);
@@ -60,13 +70,19 @@ namespace CmsSystem.Tests
         {
             var now = DateTime.Now;
             var dataAnalyzer = cms.GetDataAnalyzer();
-            var result = dataAnalyzer.GetTopSellingArticles(Cms.DataAnalyzer.Aggregation.Year, DateTime.MinValue, DateTime.MaxValue);
+            var result = dataAnalyzer.GetTopSellingArticles(
+                Cms.DataAnalyzer.Aggregation.Year,
+                DateTime.MinValue,
+                DateTime.MaxValue);
 
             var rnd = new Random();
             var article = new Catalog("catalog.csv")[rnd.Next(0, 5000)].Article;
-            cms.Add(new SaleEvent() { DateTime = now, Article = article, Count = 100501, StoreName = "M24" });
-            var newResult = dataAnalyzer.GetTopSellingArticles(Cms.DataAnalyzer.Aggregation.Year, DateTime.MinValue, DateTime.MaxValue);
-            cms.Remove(now, article);
+            cms.Add(new SaleEvent { DateTime = now, Article = article, Count = 100501, StoreName = "M24" });
+            var newResult = dataAnalyzer.GetTopSellingArticles(
+                Cms.DataAnalyzer.Aggregation.Year,
+                DateTime.MinValue,
+                DateTime.MaxValue);
+            cms.Remove(now);
 
             Assert.AreEqual(1, result.Length);
             Assert.AreEqual(1, newResult.Length);
@@ -78,11 +94,20 @@ namespace CmsSystem.Tests
         {
             get
             {
-                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 00, 0), new DateTime(2018, 6, 12, 8, 05, 0), decimal.Parse("47177803")).SetName("June valid test");
-                yield return new TestCaseData(new DateTime(2018, 10, 11, 15, 00, 0), new DateTime(2018, 10, 11, 15, 05, 0), decimal.Parse("54856407")).SetName("October valid test");
-                yield return new TestCaseData(new DateTime(2018, 8, 25, 17, 00, 0), new DateTime(2018, 8, 25, 17, 05, 0), decimal.Parse("41827870")).SetName("August valid test");
-                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 0, 0), new DateTime(2018, 6, 12, 8, 0, 0), decimal.Parse("44970")).SetName("Equal dates test");
-
+                yield return new TestCaseData(
+                    new DateTime(2018, 6, 12, 8, 00, 0),
+                    new DateTime(2018, 6, 12, 8, 05, 0),
+                    decimal.Parse("47177803")).SetName("June valid test");
+                yield return new TestCaseData(
+                    new DateTime(2018, 10, 11, 15, 00, 0),
+                    new DateTime(2018, 10, 11, 15, 05, 0),
+                    decimal.Parse("54856407")).SetName("October valid test");
+                yield return new TestCaseData(
+                    new DateTime(2018, 8, 25, 17, 00, 0),
+                    new DateTime(2018, 8, 25, 17, 05, 0),
+                    decimal.Parse("41827870")).SetName("August valid test");
+                yield return new TestCaseData(new DateTime(2018, 6, 12, 8, 0, 0), new DateTime(2018, 6, 12, 8, 0, 0),
+                    decimal.Parse("44970")).SetName("Equal dates test");
             }
         }
 
@@ -90,23 +115,41 @@ namespace CmsSystem.Tests
         {
             get
             {
-                yield return new TestCaseData(new DateTime(2018, 10, 11, 21, 0, 0), new DateTime(2018, 10, 11, 22, 0, 0), decimal.Parse("-1")).SetName("Time without events test");
-                yield return new TestCaseData(new DateTime(2019, 10, 11, 15, 0, 0), new DateTime(2019, 10, 11, 15, 05, 0), decimal.Parse("-1")).SetName("Missing future dates test");
-                yield return new TestCaseData(new DateTime(2017, 5, 12, 8, 0, 0), new DateTime(2017, 5, 12, 8, 05, 0), decimal.Parse("-1")).SetName("Missing past events test");
-                yield return new TestCaseData(new DateTime(2018, 5, 12, 8, 05, 0), new DateTime(2018, 5, 12, 8, 0, 0), decimal.Parse("-1")).SetName("Wrong dates order test");
+                yield return new TestCaseData(
+                    new DateTime(2018, 10, 11, 21, 0, 0),
+                    new DateTime(2018, 10, 11, 22, 0, 0),
+                    decimal.Parse("-1")).SetName("Time without events test");
+                yield return new TestCaseData(
+                    new DateTime(2019, 10, 11, 15, 0, 0),
+                    new DateTime(2019, 10, 11, 15, 05, 0),
+                    decimal.Parse("-1")).SetName("Missing future dates test");
+                yield return new TestCaseData(
+                    new DateTime(2017, 5, 12, 8, 0, 0),
+                    new DateTime(2017, 5, 12, 8, 05, 0),
+                    decimal.Parse("-1")).SetName("Missing past events test");
+                yield return new TestCaseData(
+                    new DateTime(2018, 5, 12, 8, 05, 0),
+                    new DateTime(2018, 5, 12, 8, 0, 0),
+                    decimal.Parse("-1")).SetName("Wrong dates order test");
             }
         }
 
         /// <summary>
-        /// Сделать, чтобы эти тесты проходили быстро - не простая задача, по умолчанию мы от вас ее не требуем. 
+        /// Сделать, чтобы эти тесты проходили быстро - не простая задача, по умолчанию мы от вас ее не требуем.
         /// Но если вы успешно справились с остальными тестами, подумайте почему эти тесты проходят так долго, даже при условии хорошей асимптотики алгоримма.
         /// </summary>
         private static IEnumerable<TestCaseData> LongRunningTests
         {
             get
             {
-                yield return new TestCaseData(new DateTime(2018, 6, 12, 0, 0, 0), new DateTime(2018, 6, 13, 0, 0, 0), decimal.Parse("6921146623")).SetName("Full day long test");
-                yield return new TestCaseData(new DateTime(2018, 10, 1, 0, 0, 0), new DateTime(2018, 10, 07, 0, 0, 0), decimal.Parse("41334527957")).SetName("Full week long test");
+                yield return new TestCaseData(
+                    new DateTime(2018, 6, 12, 0, 0, 0),
+                    new DateTime(2018, 6, 13, 0, 0, 0),
+                    decimal.Parse("6921146623")).SetName("Full day long test");
+                yield return new TestCaseData(
+                    new DateTime(2018, 10, 1, 0, 0, 0),
+                    new DateTime(2018, 10, 07, 0, 0, 0),
+                    decimal.Parse("41334527957")).SetName("Full week long test");
             }
         }
 
@@ -114,9 +157,17 @@ namespace CmsSystem.Tests
         {
             get
             {
-                yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Day, DateTime.MinValue, DateTime.MaxValue, 137).SetName("Full per day statistics");
-                yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Month, DateTime.MinValue, DateTime.MaxValue, 5).SetName("Full per month statistics");
-				// если ваш код работает быстро - раскоментите TestCase ниже
+                yield return new TestCaseData(
+                    Cms.DataAnalyzer.Aggregation.Day,
+                    DateTime.MinValue,
+                    DateTime.MaxValue,
+                    137).SetName("Full per day statistics");
+                yield return new TestCaseData(
+                    Cms.DataAnalyzer.Aggregation.Month,
+                    DateTime.MinValue,
+                    DateTime.MaxValue,
+                    5).SetName("Full per month statistics");
+                // если ваш код работает быстро - раскоментите TestCase ниже
                 //     yield return new TestCaseData(Cms.DataAnalyzer.Aggregation.Year, DateTime.MinValue, DateTime.MaxValue, 1).SetName("Full per year statistics");
             }
         }
@@ -136,11 +187,11 @@ namespace CmsSystem.Tests
                             Date = new DateTime(2018, 10, 10),
                             Top5SellingArticles = new[]
                             {
-                               "1290323",
-                               "1208675",
-                               "1158864",
-                               "1225843",
-                               "1226911"
+                                "1290323",
+                                "1208675",
+                                "1158864",
+                                "1225843",
+                                "1226911"
                             }
                         },
                         new Cms.DataAnalyzer.TopSellingArticlesResult()
@@ -200,7 +251,11 @@ namespace CmsSystem.Tests
         private void FillTestData(int startMonth, int endMonth)
         {
             var catalog = new Catalog("catalog.csv");
-            var stores = new[] { "M1\0", "M2\0", "M3\0", "M4\0", "M5\0", "M6\0", "M6\0", "M7\0", "M8\0", "M9\0", "M10", "M11", "M12", "M13", "M14", "M15", "M16", "M17", "M18", "M19", "M20", "M21", "M22", "M23", "M24", "M25", "M26", "M27" };
+            var stores = new[]
+            {
+                "M1\0", "M2\0", "M3\0", "M4\0", "M5\0", "M6\0", "M6\0", "M7\0", "M8\0", "M9\0", "M10", "M11", "M12",
+                "M13", "M14", "M15", "M16", "M17", "M18", "M19", "M20", "M21", "M22", "M23", "M24", "M25", "M26", "M27"
+            };
 
             for (var i = startMonth; i < endMonth; i++)
             {
@@ -225,7 +280,7 @@ namespace CmsSystem.Tests
                                 var store = stores[Rnd.Next(0, 26)];
                                 var count = Rnd.Next(1, 100);
                                 list.Add(
-                                    new SaleEvent()
+                                    new SaleEvent
                                     {
                                         DateTime = date,
                                         Article = article,

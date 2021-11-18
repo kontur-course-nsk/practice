@@ -31,6 +31,8 @@ namespace CmsSystem
             bTree = new BPlusTree<DateTime, IndexValue>(options);
         }
 
+        public int Count => bTree.Count;
+
         /// <summary>
         /// Добавляет инфомрацию о продаже в CMS
         /// </summary>
@@ -42,7 +44,9 @@ namespace CmsSystem
                 throw new ArgumentNullException(nameof(saleEvent));
             }
 
-            bTree.Add(saleEvent.DateTime, new IndexValue() { Article = saleEvent.Article, Store = saleEvent.StoreName, Count = saleEvent.Count });
+            bTree.Add(
+                saleEvent.DateTime,
+                new IndexValue { Article = saleEvent.Article, Store = saleEvent.StoreName, Count = saleEvent.Count });
             bTree.Commit();
         }
 
@@ -57,7 +61,9 @@ namespace CmsSystem
                 throw new ArgumentNullException(nameof(saleEvents));
             }
 
-            var data = saleEvents.Select(x => new KeyValuePair<DateTime, IndexValue>(x.DateTime, new IndexValue() { Article = x.Article, Store = x.StoreName, Count = x.Count }));
+            var data = saleEvents.Select(x => new KeyValuePair<DateTime, IndexValue>(
+                x.DateTime,
+                new IndexValue { Article = x.Article, Store = x.StoreName, Count = x.Count }));
             bTree.AddRange(data);
             bTree.Commit();
         }
@@ -66,8 +72,7 @@ namespace CmsSystem
         /// Удаляет запись за конкретное время и по конкретному артикулу
         /// </summary>
         /// <param name="dateTime"></param>
-        /// <param name="article"></param>
-        public void Remove(DateTime dateTime, string article)
+        public void Remove(DateTime dateTime)
         {
             bTree.Remove(dateTime);
             bTree.Commit();
@@ -79,7 +84,7 @@ namespace CmsSystem
         /// <returns></returns>
         public DataAnalyzer GetDataAnalyzer()
         {
-            // Таким образом DataAnalyzer получет доступ к внутреннему состоянию вашей Cms
+            // Таким образом DataAnalyzer получет доступ к вашей Cms
             return new DataAnalyzer(this);
         }
 

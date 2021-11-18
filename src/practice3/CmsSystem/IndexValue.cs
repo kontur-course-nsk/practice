@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using CSharpTest.Net.Serialization;
 
 namespace CmsSystem
@@ -24,10 +23,12 @@ namespace CmsSystem
 
         public IndexValue ReadFrom(Stream stream)
         {
-            var indexValue = new IndexValue();
-            indexValue.Article = PrimitiveSerializer.String.ReadFrom(stream);
-            indexValue.Store = PrimitiveSerializer.String.ReadFrom(stream);
-            indexValue.Count = PrimitiveSerializer.Int32.ReadFrom(stream);
+            var indexValue = new IndexValue
+            {
+                Article = PrimitiveSerializer.String.ReadFrom(stream),
+                Store = PrimitiveSerializer.String.ReadFrom(stream),
+                Count = PrimitiveSerializer.Int32.ReadFrom(stream),
+            };
             return indexValue;
         }
     }

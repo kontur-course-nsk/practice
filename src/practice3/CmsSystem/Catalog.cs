@@ -41,7 +41,7 @@ namespace CmsSystem
                     break;
                 }
 
-                catalog.Add(new CatalogRecord()
+                catalog.Add(new CatalogRecord
                 {
                     Article = row[0],
                     Name = row[1],
@@ -71,7 +71,7 @@ namespace CmsSystem
     public static class Extensions
     {
         public static T[] Slice<T>(this T[] source, int index, int length)
-        {       
+        {
             T[] slice = new T[length];
             Array.Copy(source, index, slice, 0, length);
             return slice;
