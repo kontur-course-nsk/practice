@@ -1,6 +1,7 @@
 ﻿namespace View.Todo
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
     /// Параметры поиска задач
@@ -10,12 +11,14 @@
         /// <summary>
         /// Позиция, начиная с которой нужно производить поиск
         /// </summary>
-        public int? Offset { get; set; }
+        [Range(0, int.MaxValue)]
+        public int? Offset { get; set; } = 0;
 
         /// <summary>
         /// Максимальеное количество задач, которое нужно вернуть
         /// </summary>
-        public int? Limit { get; set; }
+        [Range(1, 100)]
+        public int? Limit { get; set; } = 10;
 
         /// <summary>
         /// Пользователь, которому принадлежит задача

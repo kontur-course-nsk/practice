@@ -1,7 +1,6 @@
 namespace API.Controllers
 {
     using Todo;
-    using Model.Todo;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -10,13 +9,13 @@ namespace API.Controllers
 
     [Route("[controller]")]
     [ApiController]
-    public class TodoController : ControllerBase
+    public class TodosController : ControllerBase
     {
-        private readonly ITodoService todoService;
+        private readonly ITodoRepository todoRepository;
 
-        public TodoController(ITodoService todoService)
+        public TodosController(ITodoRepository todoRepository)
         {
-            this.todoService = todoService ?? throw new ArgumentNullException(nameof(todoService));
+            this.todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
         }
 
         [HttpGet]
@@ -26,7 +25,9 @@ namespace API.Controllers
         {
             token.ThrowIfCancellationRequested();
 
-            throw new NotImplementedException();
+            var searchResult = await this.todoRepository.SearchAsync(query, token).ConfigureAwait(false);
+            var todoList = new ViewTodos.TodoList { todoItems = searchResult };
+            return this.Ok(todoList);
         }
 
         [HttpGet("{id}")]
@@ -34,7 +35,7 @@ namespace API.Controllers
         {
             try
             {
-                var todoItem = await todoService.GetAsync(id, token).ConfigureAwait(false);
+                var todoItem = await this.todoRepository.GetAsync(id, token).ConfigureAwait(false);
                 return this.Ok(todoItem);
             }
             catch (TodoNotFoundException)
@@ -52,7 +53,7 @@ namespace API.Controllers
 
             try
             {
-                var todoInfo = await this.todoService.CreateAsync(buildInfo, token).ConfigureAwait(false);
+                var todoInfo = await this.todoRepository.CreateAsync(buildInfo, token).ConfigureAwait(false);
                 return this.Ok(todoInfo);
             }
             catch (ValidationException ex)

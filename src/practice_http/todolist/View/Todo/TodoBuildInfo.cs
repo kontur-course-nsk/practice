@@ -26,5 +26,11 @@
         /// </summary>
         [DataMember(IsRequired = true)]
         public DateTime Deadline { get; set; }
+
+        /// <summary>
+        /// Идентификатор пользователя, которому принадлежит задача
+        /// </summary>
+        [DataMember]
+        public string UserId { get; set; }
     }
 }

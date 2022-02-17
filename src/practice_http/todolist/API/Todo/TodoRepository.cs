@@ -1,14 +1,16 @@
-namespace Model.Todo.Repositories
+namespace API.Todo
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using View;
+    using View.Todo;
 
     public class TodoRepository : ITodoRepository
     {
-        private readonly IList<Todo> todos;
+        private readonly IList<View.Todo.Todo> todos;
 
         public TodoRepository()
         {
@@ -56,11 +58,11 @@ namespace Model.Todo.Repositories
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            IEnumerable<Todo> searchResult = new List<Todo>();
+            IEnumerable<Todo> searchResult = this.todos;
 
             if (query.CreatedFrom != null)
             {
-                searchResult = todos.Where(todoInfo => todoInfo.CreatedAt >= query.CreatedFrom.Value);
+                searchResult = this.todos.Where(todoInfo => todoInfo.CreatedAt >= query.CreatedFrom.Value);
             }
 
             if (query.CreatedTo != null)
@@ -101,27 +103,24 @@ namespace Model.Todo.Repositories
             var sort = query.Sort ?? SortType.Ascending;
             var sortBy = query.SortBy ?? TodoSortBy.Creation;
 
-            if (sort != SortType.Ascending || sortBy != TodoSortBy.Creation)
+            DateTime Select(TodoInfo todo)
             {
-                DateTime Select(TodoInfo todo)
+                switch (sortBy)
                 {
-                    switch (sortBy)
-                    {
-                        case TodoSortBy.Deadline:
-                            return todo.Deadline;
+                    case TodoSortBy.Deadline:
+                        return todo.Deadline;
 
-                        case TodoSortBy.Creation:
-                            return todo.CreatedAt;
+                    case TodoSortBy.Creation:
+                        return todo.CreatedAt;
 
-                        default:
-                            throw new ArgumentException($"Unknown todo sort by value \"{sortBy}\".", nameof(query));
-                    }
+                    default:
+                        throw new ArgumentException($"Unknown todo sort by value \"{sortBy}\".", nameof(query));
                 }
-
-                searchResult = sort == SortType.Ascending
-                    ? searchResult.AsEnumerable().OrderBy(Select).AsQueryable()
-                    : searchResult.AsEnumerable().OrderByDescending(Select).AsQueryable();
             }
+
+            searchResult = sort == SortType.Ascending
+                ? searchResult.AsEnumerable().OrderBy(Select).AsQueryable()
+                : searchResult.AsEnumerable().OrderByDescending(Select).AsQueryable();
 
             var res = searchResult.ToList();
             var result = res.Cast<TodoInfo>().ToList();
@@ -131,7 +130,7 @@ namespace Model.Todo.Repositories
 
         public Task<Todo> GetAsync(string id, CancellationToken token)
         {
-            var result = todos.FirstOrDefault(it => it.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
+            var result = this.todos.FirstOrDefault(it => it.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
 
             if (result == null)
             {
@@ -162,54 +161,19 @@ namespace Model.Todo.Repositories
                 Description = buildInfo.Description,
             };
 
-            todos.Add(todo);
+            this.todos.Add(todo);
 
             return Task.FromResult<TodoInfo>(todo);
         }
 
-        public Task<Todo> PatchAsync(TodoPatchInfo patchInfo, CancellationToken cancellationToken)
+        public Task<Todo> PatchAsync(string todoId, TodoPatchInfo patchInfo, CancellationToken cancellationToken)
         {
-            if (patchInfo == null)
-            {
-                throw new ArgumentNullException(nameof(patchInfo));
-            }
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var todo = todos.FirstOrDefault(it => it.Id == patchInfo.TodoId);
-
-            if (todo is null)
-            {
-                throw new TodoNotFoundException(patchInfo.TodoId);
-            }
-
-            if (patchInfo.Title != null)
-            {
-                todo.Title = patchInfo.Title;
-            }
-
-            if (patchInfo.Description != null)
-            {
-                todo.Description = patchInfo.Description;
-            }
-
-            if (patchInfo.Deadline != null)
-            {
-                todo.Deadline = patchInfo.Deadline.Value;
-            }
-
-            if (patchInfo.IsCompleted != null)
-            {
-                todo.IsCompleted = patchInfo.IsCompleted.Value;
-            }
-
-            return Task.FromResult(todo);
+            throw new NotImplementedException();
         }
 
         public Task RemoveAsync(string id, CancellationToken token)
         {
-            todos.Remove(todos.FirstOrDefault(it => it.Id == id));
-            return Task.CompletedTask;
+            throw new NotImplementedException();
         }
     }
 }
