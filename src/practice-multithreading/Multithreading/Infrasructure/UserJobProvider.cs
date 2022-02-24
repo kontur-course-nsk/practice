@@ -11,8 +11,17 @@ namespace Multithreading
         private readonly Random random = new();
         private readonly int[] userIds = { 1, 2, 3 };
 
+        private bool started;
+
         public async Task StartAsync(CancellationToken token)
         {
+            if (this.started)
+            {
+                throw new AlreadyStartedException(nameof(UserJobProvider));
+            }
+
+            this.started = true;
+
             while (!token.IsCancellationRequested)
             {
                 await Task.Delay(this.random.Next(100, 300));
@@ -27,6 +36,11 @@ namespace Multithreading
 
         public async Task<UserJob> GetAsync(CancellationToken token)
         {
+            if (!this.started)
+            {
+                throw new NotStartedException(nameof(UserJobProvider));
+            }
+
             while (!token.IsCancellationRequested)
             {
                 if (this.queue.TryDequeue(out var job))

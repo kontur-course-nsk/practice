@@ -5,13 +5,22 @@ using System.Threading.Tasks;
 
 namespace Multithreading
 {
-    internal sealed class AdminProvider
+    internal sealed class AdminJobProvider
     {
         private readonly ConcurrentQueue<AdminJob> queue = new();
         private readonly Random random = new();
 
+        private bool started;
+
         public async Task StartAsync(CancellationToken token)
         {
+            if (this.started)
+            {
+                throw new AlreadyStartedException(nameof(UserJobProvider));
+            }
+
+            this.started = true;
+
             while (!token.IsCancellationRequested)
             {
                 await Task.Delay(this.random.Next(200, 500));
@@ -21,6 +30,11 @@ namespace Multithreading
 
         public async Task<AdminJob> GetAsync(CancellationToken token)
         {
+            if (!this.started)
+            {
+                throw new NotStartedException(nameof(UserJobProvider));
+            }
+
             while (!token.IsCancellationRequested)
             {
                 if (this.queue.TryDequeue(out var job))
